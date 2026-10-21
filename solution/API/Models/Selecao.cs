@@ -13,5 +13,5 @@ public class Selecao
 
     public int ParticipacaoEmCopas { get; set; }
 
-    public int CriadoEm { get; set; }
+    public DateTime CriadoEm { get; set; } = DateTime.Now;
 }

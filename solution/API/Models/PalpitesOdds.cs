@@ -18,5 +18,5 @@ public class PalpitesOdds
 
     public decimal OldAposta { get; set; }
 
-    public int CriadoEm { get; set; }
+    public DateTime CriadoEm { get; set; } = DateTime.Now;
 }
