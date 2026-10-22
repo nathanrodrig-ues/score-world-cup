@@ -1,0 +1,10 @@
+### Casdastrar seleçao
+POST http://localhost:5047/api/selecao/cadastrar
+Content-Type: application/json
+
+{
+    "nome": "Argentina",
+    "continente": "America do Sul",
+    "titulo": 3,
+    "participacaoemcopas": 19
+}
