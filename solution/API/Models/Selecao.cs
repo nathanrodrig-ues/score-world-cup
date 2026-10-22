@@ -12,5 +12,7 @@ public class Selecao
 
     public int ParticipacaoEmCopas { get; set; }
 
+    public string Grupo {get; set;} = string.Empty;
+
     public DateTime CriadoEm { get; set; } = DateTime.Now;
 }
