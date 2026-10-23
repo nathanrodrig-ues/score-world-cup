@@ -1,4 +1,3 @@
-
 namespace API.Models;
 
 public class Selecao
@@ -12,6 +11,8 @@ public class Selecao
     public int Titulo { get; set; }
 
     public int ParticipacaoEmCopas { get; set; }
+
+    public string Grupo {get; set;} = string.Empty;
 
     public DateTime CriadoEm { get; set; } = DateTime.Now;
 }
