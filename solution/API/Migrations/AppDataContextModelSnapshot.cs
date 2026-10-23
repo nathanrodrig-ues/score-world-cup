@@ -76,6 +76,47 @@ namespace API.Migrations
 
                     b.ToTable("Seleçoes");
                 });
+
+            modelBuilder.Entity("API.Models.Usuario", b =>
+                {
+                    b.Property<int>("IdUser")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("CriadoEm")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("IdAposta")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("MetodoPagamento")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameUser")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("ValorApostado")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("IdUser");
+
+                    b.HasIndex("IdAposta");
+
+                    b.ToTable("Usuarios");
+                });
+
+            modelBuilder.Entity("API.Models.Usuario", b =>
+                {
+                    b.HasOne("API.Models.PalpitesOdds", "PalpitesOdds")
+                        .WithMany()
+                        .HasForeignKey("IdAposta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PalpitesOdds");
+                });
 #pragma warning restore 612, 618
         }
     }
