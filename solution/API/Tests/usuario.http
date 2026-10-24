@@ -1,0 +1,10 @@
+### Cadastrar usuario
+POST http://localhost:5047/api/usuario/cadastrar
+Content-Type: application/json
+
+{
+  "nameUser": "Renan Santos",
+  "metodoPagamento": "Pix",
+  "valorApostado": 100.00,
+  "cpf": "123.456.789-00"
+}

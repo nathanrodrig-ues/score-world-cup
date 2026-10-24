@@ -1,0 +1,11 @@
+### Cadastrar
+POST http://localhost:5047/api/usuario/1/palpites
+Content-Type: application/json
+
+{
+  "idJogo": 1,
+  "vitoria": true,
+  "derrota": false,
+  "empate": false,
+  "oldAposta": 2.10
+}
