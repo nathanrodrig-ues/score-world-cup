@@ -1,0 +1,10 @@
+### Cadastrar jogo
+POST http://localhost:5047/api/jogo/cadastrar
+Content-Type: application/json
+
+{
+  "idSelecao1": 1,
+  "idSelecao2": 2,
+  "fase": "Fase de Grupos",
+  "dataHora": "2026-06-15T18:00:00"
+}
