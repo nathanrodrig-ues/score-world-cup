@@ -3,20 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models;
 
-public class PalpitesOdds
+public enum Resultado{ Vitoria,Empate,Derrota}
+
+public class Palpite
 {
-    [Key]
-    public int IdAposta { get; set; }
-
-    public int Id { get; set; }
-
-    public bool Vitoria { get; set; }
-
-    public bool Derrota { get; set; }
-
-    public bool Empate { get; set; }
-
+    [Key] public int IdAposta { get; set; }
+    [ForeignKey(nameof(IdJogo))] public Jogo? Jogo { get; set; }
     public decimal OldAposta { get; set; }
-
     public DateTime CriadoEm { get; set; } = DateTime.Now;
 }

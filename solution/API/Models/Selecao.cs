@@ -2,7 +2,7 @@ namespace API.Models;
 
 public class Selecao
 {
-    public int Id { get; set; }
+    public int IdSelecao { get; set; }
 
     public string Nome { get; set; } = string.Empty;
 
