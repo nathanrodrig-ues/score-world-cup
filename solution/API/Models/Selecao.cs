@@ -1,12 +1,8 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace API.Models;
-
 
 public class Selecao
 {
-    [Key]
-    public int IdSelecao { get; set; }
+    public int Id { get; set; }
 
     public string Nome { get; set; } = string.Empty;
 

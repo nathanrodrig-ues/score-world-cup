@@ -16,30 +16,6 @@ namespace API.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.31");
 
-            modelBuilder.Entity("API.Models.Jogo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTime>("HorarioJogo")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("IdSelecao1")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdSelecao2")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdSelecao1");
-
-                    b.HasIndex("IdSelecao2");
-
-                    b.ToTable("Jogos");
-                });
-
             modelBuilder.Entity("API.Models.PalpitesOdds", b =>
                 {
                     b.Property<int>("IdAposta")
@@ -55,10 +31,7 @@ namespace API.Migrations
                     b.Property<bool>("Empate")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("IdJogo")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("IdUser")
+                    b.Property<int>("Id")
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("OldAposta")
@@ -69,16 +42,12 @@ namespace API.Migrations
 
                     b.HasKey("IdAposta");
 
-                    b.HasIndex("IdJogo");
-
-                    b.HasIndex("IdUser");
-
                     b.ToTable("PalpitesOdds");
                 });
 
             modelBuilder.Entity("API.Models.Selecao", b =>
                 {
-                    b.Property<int>("IdSelecao")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
@@ -103,7 +72,7 @@ namespace API.Migrations
                     b.Property<int>("Titulo")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("IdSelecao");
+                    b.HasKey("Id");
 
                     b.ToTable("Seleçoes");
                 });
@@ -114,12 +83,11 @@ namespace API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("CriadoEm")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("IdAposta")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("MetodoPagamento")
                         .IsRequired()
@@ -134,49 +102,19 @@ namespace API.Migrations
 
                     b.HasKey("IdUser");
 
+                    b.HasIndex("IdAposta");
+
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("API.Models.Jogo", b =>
-                {
-                    b.HasOne("API.Models.Selecao", "Selecao1")
-                        .WithMany()
-                        .HasForeignKey("IdSelecao1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Models.Selecao", "Selecao2")
-                        .WithMany()
-                        .HasForeignKey("IdSelecao2")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Selecao1");
-
-                    b.Navigation("Selecao2");
-                });
-
-            modelBuilder.Entity("API.Models.PalpitesOdds", b =>
-                {
-                    b.HasOne("API.Models.Jogo", "Jogo")
-                        .WithMany()
-                        .HasForeignKey("IdJogo")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API.Models.Usuario", "Usuario")
-                        .WithMany("PalpitesOdds")
-                        .HasForeignKey("IdUser")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Jogo");
-
-                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("API.Models.Usuario", b =>
                 {
+                    b.HasOne("API.Models.PalpitesOdds", "PalpitesOdds")
+                        .WithMany()
+                        .HasForeignKey("IdAposta")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("PalpitesOdds");
                 });
 #pragma warning restore 612, 618
