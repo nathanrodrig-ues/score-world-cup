@@ -13,6 +13,9 @@ Content-Type: application/json
 ### Listar seleções
 GET http://localhost:5047/api/selecao/listar
 
+### Deletar seleçao
+DELETE http://localhost:5047/api/selecao/deletar/2
+
 ### Cadastrar usuário (CPF entre aspas; valorApostado maior que 10)
 POST http://localhost:5047/api/usuario/cadastrar
 Content-Type: application/json
@@ -27,6 +30,9 @@ Content-Type: application/json
 ### Listar usuários
 GET http://localhost:5047/api/usuario/listar
 
+### Deletar Usuários
+DELETE  http://localhost:5047/api/usuario/deletar/12345678901
+
 ### Cadastrar jogo 
 POST http://localhost:5047/api/jogo/cadastrar
 Content-Type: application/json
@@ -34,7 +40,7 @@ Content-Type: application/json
 {
     "cpfUsuario": "12345678901",
     "idSelecao1": 1,
-    "idSelecao2": 2
+    "idSelecao2": 3
 }
 
 ### Listar jogos
@@ -52,3 +58,17 @@ Content-Type: application/json
 
 ### Listar palpites
 GET http://localhost:5047/api/palpite/listar
+
+### deletar palpites
+DELETE http://localhost:5047/api/palpite/deletar/1
+
+### alterar palpites
+PUT http://localhost:5047/api/palpite/alterar/1
+Content-Type: application/json
+
+{
+  "idJogo": 1,
+  "resultadoSelecao1": 2,
+  "resultadoSelecao2": 2,
+  "odd": 2.50
+}

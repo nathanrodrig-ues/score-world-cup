@@ -42,6 +42,18 @@ app.MapGet("/api/selecao/listar", ([FromServices] AppDataContext ctx) =>{
     return Results.Ok(ctx.Seleçoes.ToList());
 });
 
+app.MapDelete("/api/selecao/deletar/{id}",([FromRoute] int id, [FromBody] Selecao? selecao, [FromServices] AppDataContext ctx) => {
+    Selecao? selecaoEncontrada = ctx.Seleçoes.Find(id);
+
+    if(selecaoEncontrada is null){
+        return Results.BadRequest("ERRO: NENHUMA SELEÇAO ENCONTRADA");
+    }
+
+    ctx.Seleçoes.Remove(selecaoEncontrada);
+    ctx.SaveChanges();
+    return Results.Ok("SELEÇÂO DELETADA");
+});
+
 //Usuario
 app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario? usuario, [FromServices] AppDataContext ctx) => {
 
@@ -63,6 +75,18 @@ app.MapPost("/api/usuario/cadastrar", ([FromBody] Usuario? usuario, [FromService
 
 app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) => {
     return Results.Ok(ctx.Usuarios.ToList());
+});
+
+app.MapDelete("/api/Usuario/deletar/{CpfUsuario}", ([FromRoute] string CpfUsuario, [FromBody] Usuario? usuario, [FromServices] AppDataContext ctx) => {
+    Usuario? usuarioEncontrado = ctx.Usuarios.Find(CpfUsuario);
+
+    if(usuarioEncontrado is null){
+        return Results.BadRequest("ERRO: NÂO EXISTE NENHUM USUARIO CADASTRADO COM ESSE CPF");
+    }
+
+    ctx.Usuarios.Remove(usuarioEncontrado);
+    ctx.SaveChanges();
+    return Results.Ok("Usuario deletado");
 });
 
 
@@ -114,6 +138,7 @@ app.MapGet("/api/jogo/listar", ([FromServices] AppDataContext ctx) => {
     }).ToList());
 });
 
+//palpite
 app.MapPost("/api/palpite/cadastrar", ([FromBody] Palpite? palpite, [FromServices] AppDataContext ctx) => {
     if (palpite is null) { return Results.BadRequest("ERRO: PALPITE NÃO PODE SER NULO"); }
 
@@ -172,6 +197,38 @@ app.MapGet("/api/palpite/listar", ([FromServices] AppDataContext ctx) => {
     }).ToList());
 });
 
+app.MapDelete("/api/palpite/deletar/{IdAposta}", ([FromRoute] int IdAposta, [FromBody] Palpite? palpite, [FromServices] AppDataContext ctx ) =>{
+    Palpite? palpiteEncontrado = ctx.Palpites.Find(IdAposta);
+    if(palpiteEncontrado is null){
+        return Results.BadRequest("ERRO: ESSE PALPITE NÂO EXISTE");
+    }
 
+    ctx.Palpites.Remove(palpiteEncontrado);
+    ctx.SaveChanges();
+    return Results.Ok("Palpite Deletado");
+});
 
+app.MapPut("/api/palpite/alterar/{idAposta}", ([FromRoute] int idAposta, [FromBody] Palpite? palpiteModificado, [FromServices] AppDataContext ctx) => {
+    
+    if (palpiteModificado is null)
+    {
+        return Results.BadRequest("ERRO: PALPITE ALTERADO ESTA NULO");
+    }
+
+    Palpite? palpiteExistente = ctx.Palpites.Find(idAposta);
+    if (palpiteExistente is null)
+    {
+        return Results.NotFound("ERRO: ESSE PALPITE NÃO EXISTE");
+    }
+
+    palpiteExistente.IdJogo = palpiteModificado.IdJogo;
+    palpiteExistente.ResultadoSelecao1 = palpiteModificado.ResultadoSelecao1;
+    palpiteExistente.ResultadoSelecao2 = palpiteModificado.ResultadoSelecao2;
+    palpiteExistente.Odd = palpiteModificado.Odd;
+
+    ctx.Palpites.Update(palpiteExistente);
+    ctx.SaveChanges();
+
+    return Results.Ok(new { Mensagem = "SUCESSO: PALPITE ALTERADO COM SUCESSO!", Palpite = palpiteExistente });
+});
 app.Run();
