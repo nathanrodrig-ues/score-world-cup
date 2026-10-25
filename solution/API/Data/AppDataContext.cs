@@ -3,10 +3,9 @@ using API.Models;
 
 public class AppDataContext : DbContext{
     public DbSet<Selecao> Seleçoes {get; set;}
-
-    public DbSet<PalpitesOdds> PalpitesOdds {get; set; }
-
+    public DbSet<Palpite> Palpites {get; set; }
     public DbSet<Usuario> Usuarios {get; set; }
+    public DbSet<Jogo> Jogos {get; set;}
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
