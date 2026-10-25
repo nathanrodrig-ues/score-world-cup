@@ -46,7 +46,7 @@ app.MapDelete("/api/selecao/deletar/{id}",([FromRoute] int id, [FromBody] Seleca
     Selecao? selecaoEncontrada = ctx.Seleçoes.Find(id);
 
     if(selecaoEncontrada is null){
-        return Results.BadRequest("ERRO: NENHUMA SELEÇAO ENCONTRADA");
+        return Results.BadRequest("ERRO: NENHUMA SELEÇÃO ENCONTRADA");
     }
 
     ctx.Seleçoes.Remove(selecaoEncontrada);
@@ -86,7 +86,7 @@ app.MapDelete("/api/Usuario/deletar/{CpfUsuario}", ([FromRoute] string CpfUsuari
 
     ctx.Usuarios.Remove(usuarioEncontrado);
     ctx.SaveChanges();
-    return Results.Ok("Usuario deletado");
+    return Results.Ok("USUÁRIO DELETADO");
 });
 
 
@@ -136,6 +136,17 @@ app.MapGet("/api/jogo/listar", ([FromServices] AppDataContext ctx) => {
         j.IdSelecao2,
         Selecao2 = j.Selecao2!.Nome
     }).ToList());
+});
+
+app.MapDelete("/api/jogo/deletar/{IdJogo}", ([FromRoute] int IdJogo, [FromBody] Jogo? jogo, [FromServices] AppDataContext ctx) =>{
+    Jogo? jogoEncontrado = ctx.Jogos.Find(IdJogo);
+    if(jogoEncontrado is null){
+        return Results.BadRequest("ERRO: JOGO NÂO ENCONTRADO");
+    }
+
+    ctx.Jogos.Remove(jogoEncontrado);
+    ctx.SaveChanges();
+    return Results.Ok("JOGO DELETADO");
 });
 
 //palpite

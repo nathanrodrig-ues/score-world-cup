@@ -46,6 +46,9 @@ Content-Type: application/json
 ### Listar jogos
 GET http://localhost:5047/api/jogo/listar
 
+### Deletar jogos
+DELETE  http://localhost:5047/api/jogo/deletar/1
+
 ### Cadastrar palpite
 POST http://localhost:5047/api/palpite/cadastrar
 Content-Type: application/json
