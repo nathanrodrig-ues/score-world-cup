@@ -1,25 +1,54 @@
-// Casdastrar seleçao
-###
+### Cadastrar seleção (rode 2 vezes, mudando o nome)
 POST http://localhost:5047/api/selecao/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "bolivia",
-    "continente": "america do sul",
+    "nome": "Estados Unidos",
+    "continente": "America do Norte",
     "titulo": 0,
-    "participacaoemcopas": 10,
-    "grupo": "a"
+    "participacaoEmCopas": 10,
+    "grupo": "A"
 }
 
-//Listar Seleçoes cadastradas
-###
+### Listar seleções
 GET http://localhost:5047/api/selecao/listar
 
+### Cadastrar usuário (CPF entre aspas; valorApostado maior que 10)
+POST http://localhost:5047/api/usuario/cadastrar
+Content-Type: application/json
 
-//Deletar palpites do usuario
-###
-DELETE http://localhost:5047/api/deletar/palpite/6
+{
+    "cpfUsuario": "12345678901",
+    "nameUser": "Nathan",
+    "metodoPagamento": "pix",
+    "valorApostado": 50
+}
 
-//Deletar usuario
-###
-DELETE http://localhost:5047/api/deletar/usuario/
+### Listar usuários
+GET http://localhost:5047/api/usuario/listar
+
+### Cadastrar jogo 
+POST http://localhost:5047/api/jogo/cadastrar
+Content-Type: application/json
+
+{
+    "cpfUsuario": "12345678901",
+    "idSelecao1": 1,
+    "idSelecao2": 2
+}
+
+### Listar jogos
+GET http://localhost:5047/api/jogo/listar
+
+### Cadastrar palpite
+POST http://localhost:5047/api/palpite/cadastrar
+Content-Type: application/json
+
+{
+    "idJogo": 1,
+    "resultadoSelecao1": "Vitoria",
+    "odd": 3.7
+}
+
+### Listar palpites
+GET http://localhost:5047/api/palpite/listar
