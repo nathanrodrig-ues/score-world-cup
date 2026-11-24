@@ -1,9 +1,11 @@
 import React from "react";
+import CadastrarSelecao from "./CadastrarSelecao";
+
 
 function App() {
   return (
     <div>
-      <h1>SCORE TESTE</h1>
+      <CadastrarSelecao />
     </div>
   );
 }
