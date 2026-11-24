@@ -3,12 +3,13 @@ POST http://localhost:5047/api/selecao/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Estados Unidos",
-    "continente": "America do Norte",
+    "nome": "Gana",
+    "continente": "África",
     "titulo": 0,
-    "participacaoEmCopas": 10,
-    "grupo": "A"
+    "participacaoEmCopas": 5,
+    "grupo": "L"
 }
+
 
 ### Listar seleções
 GET http://localhost:5047/api/selecao/listar
@@ -21,40 +22,40 @@ POST http://localhost:5047/api/usuario/cadastrar
 Content-Type: application/json
 
 {
-    "cpfUsuario": "12345678901",
-    "nameUser": "Nathan",
+    "cpfUsuario": "12345678923",
+    "nameUser": "Renan",
     "metodoPagamento": "pix",
-    "valorApostado": 50
+    "valorApostado": 100
 }
 
 ### Listar usuários
 GET http://localhost:5047/api/usuario/listar
 
 ### Deletar Usuários
-DELETE  http://localhost:5047/api/usuario/deletar/12345678901
+DELETE  http://localhost:5047/api/usuario/deletar/12345678922
 
 ### Cadastrar jogo 
 POST http://localhost:5047/api/jogo/cadastrar
 Content-Type: application/json
 
 {
-    "cpfUsuario": "12345678901",
-    "idSelecao1": 1,
-    "idSelecao2": 3
+    "cpfUsuario": "12345678923",
+    "idSelecao1": 25,
+    "idSelecao2": 33
 }
 
 ### Listar jogos
 GET http://localhost:5047/api/jogo/listar
 
 ### Deletar jogos
-DELETE  http://localhost:5047/api/jogo/deletar/1
+DELETE  http://localhost:5047/api/jogo/deletar/3
 
 ### Cadastrar palpite
 POST http://localhost:5047/api/palpite/cadastrar
 Content-Type: application/json
 
 {
-    "idJogo": 1,
+    "idJogo": 4,
     "resultadoSelecao1": "Vitoria",
     "odd": 3.7
 }
@@ -63,7 +64,7 @@ Content-Type: application/json
 GET http://localhost:5047/api/palpite/listar
 
 ### deletar palpites
-DELETE http://localhost:5047/api/palpite/deletar/1
+DELETE http://localhost:5047/api/palpite/deletar/4
 
 ### alterar palpites
 PUT http://localhost:5047/api/palpite/alterar/1

@@ -2,18 +2,30 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
-using System.Security.Cryptography.X509Certificates;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddDbContext<AppDataContext>();
+
 builder.Services.ConfigureHttpJsonOptions(o => {
-    // Enum: "Vitoria" / "Empate" / "Derrota"
     o.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
-    // "cpfUsuario": "12345678901"
     o.SerializerOptions.NumberHandling = JsonNumberHandling.AllowReadingFromString;
 });
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("front", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
+app.UseCors("front");
 
 //Selecao
 app.MapPost("/api/selecao/cadastrar", ([FromBody] Selecao? selecao, [FromServices] AppDataContext ctx) =>{
