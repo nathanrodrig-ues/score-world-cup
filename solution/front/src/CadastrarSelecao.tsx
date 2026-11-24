@@ -1,9 +1,12 @@
 import { useState, FormEvent } from "react";
 import axios from "axios";
-import { Selecao } from "./models/Selecao";
+import { Selecao } from "./models/Selecao"; // Ajuste o caminho se o seu modelo estiver em outra pasta
 
 function CadastrarSelecao() {
   const [nome, setNome] = useState("");
+  const [continente, setContinente] = useState("");
+  const [titulo, setTitulo] = useState<number>(0);
+  const [participacaoEmCopas, setParticipacaoEmCopas] = useState<number>(0);
   const [grupo, setGrupo] = useState("");
   const [mensagem, setMensagem] = useState("");
 
@@ -11,13 +14,25 @@ function CadastrarSelecao() {
     e.preventDefault();
     setMensagem("");
 
-    const selecao: Selecao = { nome, grupo };
+    // Monta o objeto exatamente como o C# espera
+    const selecao: Selecao = { 
+      nome, 
+      continente, 
+      titulo, 
+      participacaoEmCopas, 
+      grupo 
+    };
 
     try {
       await axios.post("http://localhost:5047/api/selecao/cadastrar", selecao);
+      
       setMensagem("Seleção cadastrada com sucesso!");
-      setNome("");
+      setNome(""); 
+      setContinente(""); 
+      setTitulo(0); 
+      setParticipacaoEmCopas(0); 
       setGrupo("");
+      
     } catch (erro) {
       if (axios.isAxiosError(erro) && erro.response) {
         setMensagem(String(erro.response.data));
@@ -29,7 +44,8 @@ function CadastrarSelecao() {
 
   return (
     <form onSubmit={enviarSelecaoAPI}>
-      <h1>Cadastrar Seleção</h1>
+      <h3>Cadastrar Seleção</h3>
+      
       <div>
         <label>Nome</label>
         <input
@@ -39,6 +55,37 @@ function CadastrarSelecao() {
           required
         />
       </div>
+
+      <div>
+        <label>Continente</label>
+        <input
+          type="text"
+          value={continente}
+          onChange={(e) => setContinente(e.target.value)}
+          required
+        />
+      </div>
+
+      <div>
+        <label>Títulos</label>
+        <input
+          type="number"
+          value={titulo}
+          onChange={(e) => setTitulo(Number(e.target.value))}
+          required
+        />
+      </div>
+
+      <div>
+        <label>Participações em Copas</label>
+        <input
+          type="number"
+          value={participacaoEmCopas}
+          onChange={(e) => setParticipacaoEmCopas(Number(e.target.value))}
+          required
+        />
+      </div>
+
       <div>
         <label>Grupo</label>
         <input
@@ -49,6 +96,7 @@ function CadastrarSelecao() {
           required
         />
       </div>
+
       <button type="submit">Cadastrar</button>
       {mensagem && <p>{mensagem}</p>}
     </form>
