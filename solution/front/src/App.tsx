@@ -1,25 +1,37 @@
-import React from 'react';
 
-import CadastrarSelecao from './CadastrarSelecao';
-import CadastrarJogo from './CadastrarJogo';
-import CadastrarPalpite from './CadastrarPalpite';
+import React from "react";
 
+import CadastrarUsuario from "./CadastrarUsuario";
+import ListarUsuario from "./ListarUsuario";
 
-import ListarSelecao from './ListarSelecao';
-import ListarJogo from './ListarJogo';
-import ListarPalpites from './ListarPalpite';
-import AlterarPalpite from './AlterarPalpite';
+import CadastrarSelecao from "./CadastrarSelecao";
+import ListarSelecao from "./ListarSelecao";
 
+import CadastrarJogo from "./CadastrarJogo";
+import ListarJogo from "./ListarJogo";
+
+import CadastrarPalpite from "./CadastrarPalpite";
+import ListarPalpites from "./ListarPalpite";
+import AlterarPalpite from "./AlterarPalpite";
 
 function App() {
   return (
     <div className="App">
+      <h1>Score World Cup</h1>
+
+      <hr />
+
+      <section>
+        <h2>Usuários</h2>
+        <CadastrarUsuario />
+        <ListarUsuario />
+      </section>
+
       <hr />
 
       <section>
         <h2>Seleções</h2>
         <CadastrarSelecao />
-        <br />
         <ListarSelecao />
       </section>
 
@@ -28,18 +40,15 @@ function App() {
       <section>
         <h2>Jogos</h2>
         <CadastrarJogo />
-        <br />
         <ListarJogo />
       </section>
 
       <hr />
 
       <section>
-        <h2>Apostas</h2>
+        <h2>Palpites</h2>
         <CadastrarPalpite />
-        <br />
         <ListarPalpites />
-        <br />
         <AlterarPalpite />
       </section>
     </div>
