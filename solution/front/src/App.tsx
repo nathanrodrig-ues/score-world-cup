@@ -14,6 +14,11 @@ import CadastrarPalpite from "./CadastrarPalpite";
 import ListarPalpites from "./ListarPalpite";
 import AlterarPalpite from "./AlterarPalpite";
 
+import DeletarSelecao from "./DeletarSelecao";
+import DeletarJogo from "./AlterarJogo";
+import DeletarPalpite from "./AlterarPalpite";
+import DeletarUsuario from "./AlterarUsuario";
+
 function App() {
   return (
     <div className="App">
