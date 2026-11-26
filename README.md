@@ -119,7 +119,7 @@ Os arquivos de requisições HTTP presentes na pasta REST podem ser utilizados p
 
 Desenvolvimento
 
-O projeto foi desenvolvido em equipe, utilizando Git e GitHub para o controle de versão e o compartilhamento do código-fonte. Foram utilizadas branches separadas para o desenvolvimento do frontend e backend, garantindo a organização e colaboração de todos os integrantes.
+O projeto foi desenvolvido em equipe, utilizando Git e GitHub para o controle de versão e o compartilhamento do código-fonte.
 
 Licença
 
