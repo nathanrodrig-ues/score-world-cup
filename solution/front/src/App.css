@@ -1,0 +1,741 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+/* ============ Tema: branco + azul escuro, minimalista ============ */
+:root {
+  --azul: #14367a;
+  --azul-claro: #3f6fd1;
+  --azul-soft: #eaf0fb;
+  --grad: linear-gradient(90deg, #0d2a63 0%, #3f6fd1 100%);
+  --bg: #f7f8fb;
+  --branco: #ffffff;
+  --texto: #111827;
+  --muted: #6b7280;
+  --borda: #e5e7eb;
+  --cinza-caixa: #f1f2f4;
+  --perigo: #d92d3a;
+  --ok: #138a4b;
+  --alerta: #b7791f;
+  --raio: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--texto);
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ Barra superior (clara) ============ */
+.app {
+  min-height: 100vh;
+}
+
+.topo {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  min-height: 64px;
+  padding: 0 32px;
+  background: var(--branco);
+  border-bottom: 1px solid var(--borda);
+}
+
+/* A logo é branca com fundo preto: inverte e "multiplica" para ficar escura no fundo branco */
+.logo {
+  height: 38px;
+  filter: invert(1);
+  mix-blend-mode: multiply;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  align-items: stretch;
+  flex: 1;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 0 12px;
+  height: 100%;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.nav-link:hover,
+.nav-grupo:hover > .nav-link,
+.nav-grupo:focus-within > .nav-link {
+  color: var(--azul-claro);
+}
+
+.nav-link.ativo {
+  color: var(--azul);
+  border-bottom-color: var(--azul);
+}
+
+.seta {
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.nav-grupo {
+  position: relative;
+  display: flex;
+}
+
+.nav-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 210px;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.12);
+  padding: 6px 0;
+  z-index: 50;
+}
+
+.nav-grupo:hover .nav-menu,
+.nav-grupo:focus-within .nav-menu {
+  display: block;
+}
+
+.nav-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--texto);
+  padding: 10px 16px;
+  cursor: pointer;
+}
+
+.nav-menu-item:hover {
+  background: var(--azul-soft);
+  color: var(--azul);
+}
+
+.nav-menu-item.ativo {
+  font-weight: 700;
+  color: var(--azul);
+}
+
+.nav-menu-item.perigo:hover {
+  background: #fdecee;
+  color: var(--perigo);
+}
+
+.topo-acoes {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.btn-topo {
+  background: var(--branco);
+  border: 1px solid var(--azul);
+  color: var(--azul);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-topo:hover,
+.btn-topo.ativo {
+  background: var(--azul);
+  color: #fff;
+}
+
+.btn-topo-perigo {
+  border-color: var(--perigo);
+  color: var(--perigo);
+}
+
+.btn-topo-perigo:hover,
+.btn-topo-perigo.ativo {
+  background: var(--perigo);
+  color: #fff;
+}
+
+/* Painel flutuante: Cadastrar / Deletar Usuário */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+}
+
+.popover {
+  position: fixed;
+  top: 72px;
+  right: 32px;
+  z-index: 30;
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100vh - 96px);
+  overflow-y: auto;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  box-shadow: 0 14px 36px rgba(17, 24, 39, 0.18);
+}
+
+.popover-fechar {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.popover-fechar:hover {
+  background: var(--bg);
+  color: var(--texto);
+}
+
+.app .popover form {
+  border: none;
+  box-shadow: none;
+  max-width: none;
+  border-radius: 0;
+}
+
+/* ============ Conteúdo ============ */
+.conteudo {
+  padding: 20px 32px 56px;
+}
+
+.painel {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.migalha {
+  max-width: 1040px;
+  margin: 0 auto 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.migalha strong {
+  color: var(--texto);
+  font-weight: 600;
+}
+
+.app h1,
+.app h2,
+.app h3 {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+/* ============ Formulários ============ */
+.app form {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 24px;
+  max-width: 480px;
+}
+
+.app form > div:not([class]),
+.app .cartao-corpo > div:not([class]) {
+  margin-bottom: 16px;
+}
+
+.app label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.app input,
+.app select {
+  width: 100%;
+  background: var(--branco);
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  color: var(--texto);
+  font-family: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.app input:focus,
+.app select:focus {
+  border-color: var(--azul-claro);
+  box-shadow: 0 0 0 3px rgba(63, 111, 209, 0.18);
+}
+
+.app form button[type="submit"] {
+  background: var(--azul) !important;
+  color: #fff !important;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 22px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.app form button[type="submit"]:hover {
+  background: #0d2a63 !important;
+}
+
+.app form button[type="submit"].btn-deletar,
+.app .btn-deletar {
+  background: var(--perigo) !important;
+}
+
+.app .btn-deletar:hover {
+  background: #b92430 !important;
+}
+
+.app form p {
+  margin: 16px 0 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--azul-soft);
+  font-size: 13px;
+  color: var(--azul);
+}
+
+/* ============ Cartão "Acumulada do dia" ============ */
+.cartao {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  overflow: hidden;
+}
+
+.app form.cartao {
+  padding: 0;
+}
+
+.cartao-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--grad);
+  color: #fff;
+}
+
+.app .cartao-topo h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cartao-data {
+  font-size: 12px;
+  font-weight: 600;
+  color: #dbe6fa;
+}
+
+.cartao-corpo {
+  padding: 20px 18px;
+}
+
+.linha {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--borda);
+}
+
+.linha:last-of-type {
+  border-bottom: none;
+}
+
+.escudos {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.escudo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--azul-soft);
+  color: var(--azul);
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.linha-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.linha-titulo {
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: var(--azul);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.linha-sub {
+  margin-top: 5px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.linha-direita {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.linha-direita .linha-sub {
+  margin-top: 0;
+}
+
+.odd-chip {
+  min-width: 56px;
+  text-align: center;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: var(--azul-soft);
+  color: var(--azul);
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.valor-chip {
+  font-weight: 800;
+  color: var(--azul);
+  font-size: 15px;
+}
+
+.cartao-rodape {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 14px 18px;
+  background: #fafbfc;
+  border-top: 1px solid var(--borda);
+}
+
+.rodape-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rodape-rotulo {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rodape-valor {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--azul);
+}
+
+.vazio {
+  padding: 24px 18px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ============ Tabelas (listar seleções e jogos) ============ */
+.app table {
+  width: 100% !important;
+  border: 1px solid var(--borda);
+  border-collapse: separate !important;
+  border-spacing: 0;
+  background: var(--branco);
+  border-radius: var(--raio);
+  overflow: hidden;
+  margin-top: 0 !important;
+  font-size: 14px;
+}
+
+.app thead tr {
+  background: #f3f4f6 !important;
+}
+
+.app th {
+  padding: 12px 14px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+  border: none;
+}
+
+.app td {
+  padding: 12px 14px;
+  border: none;
+  border-top: 1px solid var(--borda);
+}
+
+.app tbody tr:hover {
+  background: #fafbfc;
+}
+
+.app h3 + p {
+  color: var(--alerta);
+}
+
+/* ============ Tela inicial: jogos ao vivo ============ */
+.home-topo {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.app .home-titulo {
+  margin: 0;
+  font-size: 22px;
+}
+
+.home-sub {
+  margin: 4px 0 0;
+  color: var(--azul-claro);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.btn-secundario {
+  background: var(--branco);
+  border: 1px solid #d1d5db;
+  color: var(--azul);
+  font-family: inherit;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-secundario:hover {
+  border-color: var(--azul);
+}
+
+.aviso {
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  color: var(--muted);
+}
+
+.aviso-erro {
+  color: var(--perigo);
+  border-color: #f3c0c4;
+  background: #fdf3f4;
+}
+
+.grade-jogos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card-jogo {
+  background: var(--branco);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 16px;
+}
+
+.card-jogo-topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 13px;
+}
+
+.card-jogo-topo strong {
+  font-weight: 600;
+  color: var(--texto);
+}
+
+.card-jogo-topo span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.confronto {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+}
+
+.time .escudo {
+  width: 44px;
+  height: 44px;
+  font-size: 14px;
+}
+
+.time-nome {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.vs {
+  font-weight: 800;
+  color: var(--texto);
+}
+
+.previsao {
+  background: var(--cinza-caixa);
+  border: 1px solid var(--borda);
+  border-radius: 8px;
+  padding: 14px 16px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.previsao b {
+  font-weight: 700;
+}
+
+.previsao-old {
+  margin-top: 6px;
+  font-weight: 600;
+  border-bottom: 1px solid var(--texto);
+  display: inline-block;
+}
+
+.barra {
+  height: 8px;
+  margin: 14px 0 8px;
+  border-radius: 999px;
+  background: #d1d5db;
+  overflow: hidden;
+}
+
+.barra-preenchida {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--azul);
+}
+
+.confianca {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--azul-claro);
+}
+
+/* ============ Responsivo ============ */
+@media (max-width: 900px) {
+  .topo {
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    padding: 10px 16px;
+  }
+
+  .nav {
+    order: 3;
+    flex-basis: 100%;
+    flex-wrap: wrap;
+    align-self: auto;
+  }
+
+  .nav-link {
+    height: 40px;
+  }
+
+  .topo-acoes {
+    margin-left: auto;
+  }
+
+  .popover {
+    top: 110px;
+    right: 16px;
+  }
+
+  .conteudo {
+    padding: 16px;
+  }
+
+  .grade-jogos {
+    grid-template-columns: 1fr;
+  }
+
+  .app table {
+    display: block;
+    overflow-x: auto;
+  }
+}
