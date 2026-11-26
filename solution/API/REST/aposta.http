@@ -3,19 +3,19 @@ POST http://localhost:5047/api/selecao/cadastrar
 Content-Type: application/json
 
 {
-    "nome": "Gana",
-    "continente": "África",
+    "nome": "Uzbequistão",
+    "continente": "Ásia",
     "titulo": 0,
-    "participacaoEmCopas": 5,
-    "grupo": "L"
-}
+    "participacaoEmCopas": 1,
+    "grupo": "K"
+  }
 
 
 ### Listar seleções
 GET http://localhost:5047/api/selecao/listar
 
 ### Deletar seleçao
-DELETE http://localhost:5047/api/selecao/deletar/2
+DELETE http://localhost:5047/api/selecao/deletar/
 
 ### Cadastrar usuário (CPF entre aspas; valorApostado maior que 10)
 POST http://localhost:5047/api/usuario/cadastrar
