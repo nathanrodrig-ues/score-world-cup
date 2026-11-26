@@ -54,7 +54,7 @@ app.MapGet("/api/selecao/listar", ([FromServices] AppDataContext ctx) =>{
     return Results.Ok(ctx.Seleçoes.ToList());
 });
 
-app.MapDelete("/api/selecao/deletar/{id}",([FromRoute] int id, [FromBody] Selecao? selecao, [FromServices] AppDataContext ctx) => {
+app.MapDelete("/api/selecao/deletar/{id}",([FromRoute] int id, [FromServices] Selecao? selecao, [FromServices] AppDataContext ctx) => {
     Selecao? selecaoEncontrada = ctx.Seleçoes.Find(id);
 
     if(selecaoEncontrada is null){
@@ -89,7 +89,7 @@ app.MapGet("/api/usuario/listar", ([FromServices] AppDataContext ctx) => {
     return Results.Ok(ctx.Usuarios.ToList());
 });
 
-app.MapDelete("/api/Usuario/deletar/{CpfUsuario}", ([FromRoute] string CpfUsuario, [FromBody] Usuario? usuario, [FromServices] AppDataContext ctx) => {
+app.MapDelete("/api/Usuario/deletar/{CpfUsuario}", ([FromRoute] string CpfUsuario, [FromServices] Usuario? usuario, [FromServices] AppDataContext ctx) => {
     Usuario? usuarioEncontrado = ctx.Usuarios.Find(CpfUsuario);
 
     if(usuarioEncontrado is null){
@@ -150,7 +150,7 @@ app.MapGet("/api/jogo/listar", ([FromServices] AppDataContext ctx) => {
     }).ToList());
 });
 
-app.MapDelete("/api/jogo/deletar/{IdJogo}", ([FromRoute] int IdJogo, [FromBody] Jogo? jogo, [FromServices] AppDataContext ctx) =>{
+app.MapDelete("/api/jogo/deletar/{IdJogo}", ([FromRoute] int IdJogo, [FromServices] Jogo? jogo, [FromServices] AppDataContext ctx) =>{
     Jogo? jogoEncontrado = ctx.Jogos.Find(IdJogo);
     if(jogoEncontrado is null){
         return Results.BadRequest("ERRO: JOGO NÂO ENCONTRADO");
@@ -220,7 +220,7 @@ app.MapGet("/api/palpite/listar", ([FromServices] AppDataContext ctx) => {
     }).ToList());
 });
 
-app.MapDelete("/api/palpite/deletar/{IdAposta}", ([FromRoute] int IdAposta, [FromBody] Palpite? palpite, [FromServices] AppDataContext ctx ) =>{
+app.MapDelete("/api/palpite/deletar/{IdAposta}", ([FromRoute] int IdAposta, [FromServices] Palpite? palpite, [FromServices] AppDataContext ctx ) =>{
     Palpite? palpiteEncontrado = ctx.Palpites.Find(IdAposta);
     if(palpiteEncontrado is null){
         return Results.BadRequest("ERRO: ESSE PALPITE NÂO EXISTE");
